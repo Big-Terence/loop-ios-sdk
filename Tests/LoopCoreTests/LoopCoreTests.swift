@@ -78,4 +78,119 @@ final class LoopCoreTests: XCTestCase {
         XCTAssertEqual(ctx["tzIana"] as? String, "Europe/Paris")
         XCTAssertEqual(ctx["sdk"] as? String, "loop-ios")
     }
+
+    // MARK: Write-key → Authorization: Bearer on /v1/events and /v1/register (A2)
+    func testTransportSendsAuthorizationHeaderOnEvents() throws {
+        let req = try captureRequest { transport in
+            let env = EventEnvelope(
+                tenantId: "t", externalId: "u", name: "received",
+                context: EventContext()
+            )
+            transport.send(env)
+        }
+        XCTAssertEqual(req.url?.path, "/v1/events")
+        XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization"), "Bearer lpk_test123")
+    }
+
+    func testTransportSendsAuthorizationHeaderOnRegister() throws {
+        let req = try captureRequest { transport in
+            transport.register(externalId: "u", deviceToken: "deadbeef", environment: .production)
+        }
+        XCTAssertEqual(req.url?.path, "/v1/register")
+        XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization"), "Bearer lpk_test123")
+    }
+
+    func testTransportOmitsAuthHeaderWithoutKey() throws {
+        let req = try captureRequest(publishableKey: nil) { transport in
+            transport.send(EventEnvelope(tenantId: "t", externalId: "u", name: "x", context: EventContext()))
+        }
+        XCTAssertNil(req.value(forHTTPHeaderField: "Authorization")) // back-compat: unauthenticated
+    }
+
+    /// Drive a Transport through a stub URLProtocol and return the request it sent.
+    private func captureRequest(
+        publishableKey: String? = "lpk_test123",
+        _ body: (Transport) -> Void
+    ) throws -> URLRequest {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [CapturingProtocol.self]
+        let session = URLSession(configuration: config)
+        let exp = expectation(description: "request captured")
+        CapturingProtocol.captured = nil
+        CapturingProtocol.onCapture = { exp.fulfill() }
+        defer { CapturingProtocol.onCapture = nil }
+        let transport = Transport(
+            config: LoopConfig(apiBase: URL(string: "https://ingest.example.com")!,
+                               tenantId: "t", publishableKey: publishableKey),
+            session: session
+        )
+        body(transport)
+        wait(for: [exp], timeout: 5)
+        return try XCTUnwrap(CapturingProtocol.captured)
+    }
+
+    // MARK: App Group shared config round-trip (app ⇄ NSE)
+    func testSharedConfigStoreRoundTrip() throws {
+        let suite = "test.loop.sdk.\(UUID().uuidString)"
+        defer { UserDefaults().removePersistentDomain(forName: suite) }
+        let cfg = LoopSharedConfig(
+            apiBase: URL(string: "https://ingest.example.com")!,
+            tenantId: "tenant-1", publishableKey: "lpk_abc",
+            externalId: "user_alice", environment: .production
+        )
+        LoopAppGroupStore.save(cfg, appGroup: suite)
+        let loaded = try XCTUnwrap(LoopAppGroupStore.load(appGroup: suite))
+        XCTAssertEqual(loaded, cfg)
+        LoopAppGroupStore.clear(appGroup: suite)
+        XCTAssertNil(LoopAppGroupStore.load(appGroup: suite))
+    }
+
+    // MARK: NSE `received` envelope built cross-process from payload + shared config
+    func testReceivedEnvelopeFromPayload() throws {
+        let cfg = LoopSharedConfig(
+            apiBase: URL(string: "https://ingest.example.com")!,
+            tenantId: "tenant-1", publishableKey: "lpk_abc",
+            externalId: "user_alice", environment: .production
+        )
+        let userInfo: [AnyHashable: Any] = [
+            "message_id": "msg-1", "flow_id": "flow-1", "node_id": "node-1",
+            "aps": ["alert": ["title": "hi"]],
+        ]
+        let env = try XCTUnwrap(Loop.receivedEnvelope(userInfo: userInfo, config: cfg))
+        XCTAssertEqual(env.name, "received")
+        XCTAssertEqual(env.externalId, "user_alice")
+        XCTAssertEqual(env.tenantId, "tenant-1")
+        XCTAssertEqual(env.properties["message_id"], .string("msg-1"))
+        XCTAssertEqual(env.properties["flow_id"], .string("flow-1"))
+        XCTAssertEqual(env.properties["node_id"], .string("node-1"))
+        XCTAssertEqual(env.context.environment, .production)
+    }
+
+    func testReceivedEnvelopeNilWithoutIdentity() {
+        let cfg = LoopSharedConfig(
+            apiBase: URL(string: "https://ingest.example.com")!,
+            tenantId: "tenant-1", externalId: nil
+        )
+        // No identified user ⇒ nothing to attribute ⇒ no event (best-effort).
+        XCTAssertNil(Loop.receivedEnvelope(userInfo: ["message_id": "m"], config: cfg))
+    }
+}
+
+/// Captures the outgoing URLRequest of a Transport POST for header assertions.
+final class CapturingProtocol: URLProtocol {
+    nonisolated(unsafe) static var captured: URLRequest?
+    nonisolated(unsafe) static var onCapture: (() -> Void)?
+
+    override class func canInit(with request: URLRequest) -> Bool { true }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+    override func startLoading() {
+        Self.captured = request
+        Self.onCapture?()
+        let resp = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        client?.urlProtocol(self, didReceive: resp, cacheStoragePolicy: .notAllowed)
+        client?.urlProtocolDidFinishLoading(self)
+    }
+
+    override func stopLoading() {}
 }

@@ -5,7 +5,7 @@ import Foundation
 /// the environment at runtime from `embedded.mobileprovision` and ships it with
 /// the token — NOT `#if DEBUG`, which is wrong on TestFlight (TestFlight builds
 /// are Release but use the SANDBOX APNs environment).
-public enum ApnsEnvironment: String, Sendable {
+public enum ApnsEnvironment: String, Sendable, Codable {
     case sandbox
     case production
 }

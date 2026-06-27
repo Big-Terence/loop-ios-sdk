@@ -6,10 +6,25 @@ public struct LoopConfig: Sendable {
     /// deployed Workers URL.
     public var apiBase: URL
     public var tenantId: String
+    /// Publishable write-key (`lpk_…`) shown in the dashboard. When set, it is sent
+    /// as `Authorization: Bearer <key>` on `/v1/events` and `/v1/register` so the
+    /// worker can authenticate ingestion (A2). Optional for back-compat.
+    public var publishableKey: String?
+    /// App Group id shared with the NotificationServiceExtension. When set, the SDK
+    /// mirrors the ingest config into App Group `UserDefaults` so the NSE (a
+    /// separate process) can emit the `received` event. See README → "received".
+    public var appGroup: String?
 
-    public init(apiBase: URL, tenantId: String) {
+    public init(
+        apiBase: URL,
+        tenantId: String,
+        publishableKey: String? = nil,
+        appGroup: String? = nil
+    ) {
         self.apiBase = apiBase
         self.tenantId = tenantId
+        self.publishableKey = publishableKey
+        self.appGroup = appGroup
     }
 }
 
@@ -32,6 +47,7 @@ public final class Transport: @unchecked Sendable {
         req.httpMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.setValue(envelope.traceparent, forHTTPHeaderField: "traceparent")
+        authorize(&req)
         req.httpBody = body
         post(req, attempt: 0)
     }
@@ -48,8 +64,16 @@ public final class Transport: @unchecked Sendable {
         var req = URLRequest(url: config.apiBase.appendingPathComponent("v1/register"))
         req.httpMethod = "POST"
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        authorize(&req)
         req.httpBody = body
         post(req, attempt: 0)
+    }
+
+    /// Attach the publishable write-key as `Authorization: Bearer <key>` (A2). No-op
+    /// when no key is configured (back-compat: unauthenticated ingestion).
+    private func authorize(_ req: inout URLRequest) {
+        guard let key = config.publishableKey, !key.isEmpty else { return }
+        req.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
     }
 
     private func post(_ req: URLRequest, attempt: Int) {
