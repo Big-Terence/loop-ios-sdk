@@ -17,7 +17,7 @@ let package = Package(
         .target(name: "LoopCore"),
         .target(name: "LoopPush", dependencies: ["LoopCore"]),
         .target(name: "LoopInApp", dependencies: ["LoopCore"]),
-        .target(name: "LoopNotificationService"),
+        .target(name: "LoopNotificationService", dependencies: ["LoopCore"]),
         // Dev-only end-to-end smoke: drives the real SDK code (Transport) against
         // a running Ingest Worker. `swift run loop-smoke <apiBase> <tenantId>`.
         .executableTarget(name: "loop-smoke", dependencies: ["LoopCore"]),

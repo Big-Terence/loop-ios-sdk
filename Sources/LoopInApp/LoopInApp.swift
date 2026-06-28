@@ -12,6 +12,7 @@ public final class LoopInApp: @unchecked Sendable {
     public static let shared = LoopInApp()
     private let lock = NSLock()
     private var session = SessionManager()
+    private var didEmitAppOpen = false
 
     private init() {
         #if canImport(UIKit) && os(iOS)
@@ -24,7 +25,18 @@ public final class LoopInApp: @unchecked Sendable {
         #endif
     }
 
-    public static func start() { _ = shared }
+    /// Call once at `didFinishLaunching`. Starts session tracking AND emits an
+    /// `app_open` event for this cold launch (exactly once per process). This is
+    /// distinct from `session_started`, which only fires on a ≥30s background→
+    /// foreground return — so the two never double-count.
+    public static func start() {
+        shared.lock.lock()
+        let firstStart = !shared.didEmitAppOpen
+        shared.didEmitAppOpen = true
+        let sid = shared.session.sessionId
+        shared.lock.unlock()
+        if firstStart { Loop.track("app_open", ["session_id": .string(sid)]) }
+    }
 
     public var currentSessionId: String {
         lock.lock(); defer { lock.unlock() }; return session.sessionId

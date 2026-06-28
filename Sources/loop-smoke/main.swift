@@ -3,16 +3,17 @@ import LoopCore
 
 // End-to-end smoke: exercises the REAL SDK code path (Loop.configure → identify →
 // registerDeviceToken → track → Transport → HTTP) against a running Ingest Worker.
-// Usage: swift run loop-smoke [apiBase] [tenantId] [externalId]
+// Usage: swift run loop-smoke [apiBase] [tenantId] [externalId] [publishableKey]
 
 let args = CommandLine.arguments
 let apiBase = URL(string: args.count > 1 ? args[1] : "http://localhost:8787")!
 let tenantId = args.count > 2 ? args[2] : "00000000-0000-0000-0000-0000000000aa"
 let externalId = args.count > 3 ? args[3] : "sdk_smoke_user"
+let publishableKey = args.count > 4 ? args[4] : nil // `lpk_…` → Authorization: Bearer (A2)
 
-print("[loop-smoke] apiBase=\(apiBase) tenant=\(tenantId) externalId=\(externalId)")
+print("[loop-smoke] apiBase=\(apiBase) tenant=\(tenantId) externalId=\(externalId) key=\(publishableKey != nil ? "set" : "none")")
 
-Loop.configure(apiBase: apiBase, tenantId: tenantId)
+Loop.configure(apiBase: apiBase, tenantId: tenantId, publishableKey: publishableKey)
 Loop.identify(externalId)
 print("[loop-smoke] detected APNs environment: \(Loop.shared.currentEnvironment.rawValue)")
 
