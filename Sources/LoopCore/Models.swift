@@ -38,6 +38,9 @@ public struct EventContext: Encodable, Sendable {
     public var osVersion: String?
     public var appVersion: String?
     public var environment: ApnsEnvironment?
+    /// How the build was installed (appstore | testflight | development) — distinct from
+    /// `environment` (APNs routing). Lets the dashboard tell TestFlight from App Store.
+    public var installSource: InstallSource?
     public var tzIana: String?
     public var locale: String?
 
@@ -48,6 +51,7 @@ public struct EventContext: Encodable, Sendable {
         osVersion: String? = nil,
         appVersion: String? = nil,
         environment: ApnsEnvironment? = nil,
+        installSource: InstallSource? = nil,
         tzIana: String? = nil,
         locale: String? = nil
     ) {
@@ -57,12 +61,13 @@ public struct EventContext: Encodable, Sendable {
         self.osVersion = osVersion
         self.appVersion = appVersion
         self.environment = environment
+        self.installSource = installSource
         self.tzIana = tzIana
         self.locale = locale
     }
 
     enum CodingKeys: String, CodingKey {
-        case sdk, sdkVersion, os, osVersion, appVersion, environment, tzIana, locale
+        case sdk, sdkVersion, os, osVersion, appVersion, environment, installSource, tzIana, locale
     }
     public func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
@@ -72,6 +77,7 @@ public struct EventContext: Encodable, Sendable {
         try c.encodeIfPresent(osVersion, forKey: .osVersion)
         try c.encodeIfPresent(appVersion, forKey: .appVersion)
         try c.encodeIfPresent(environment?.rawValue, forKey: .environment)
+        try c.encodeIfPresent(installSource?.rawValue, forKey: .installSource)
         try c.encodeIfPresent(tzIana, forKey: .tzIana)
         try c.encodeIfPresent(locale, forKey: .locale)
     }
@@ -124,5 +130,5 @@ public enum Trace {
 }
 
 public enum LoopSDKInfo {
-    public static let version = "0.2.0"
+    public static let version = "0.3.0"
 }

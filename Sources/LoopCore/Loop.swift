@@ -45,6 +45,7 @@ public final class Loop: @unchecked Sendable {
     private var transport: Transport?
     private var externalId: String?
     private var environment: ApnsEnvironment = .sandbox
+    private var installSource: InstallSource = .development
 
     private init() {}
 
@@ -77,10 +78,12 @@ public final class Loop: @unchecked Sendable {
         #else
         self.environment = .sandbox // the Simulator has no real APNs
         #endif
+        self.installSource = InstallSource.detect()
         let extId = self.externalId
         let env = self.environment
+        let src = self.installSource
         lock.unlock()
-        persistSharedConfig(config: config, externalId: extId, environment: env)
+        persistSharedConfig(config: config, externalId: extId, environment: env, installSource: src)
     }
 
     /// First-class external identity (R1) — dedup happens server-side.
@@ -89,8 +92,9 @@ public final class Loop: @unchecked Sendable {
         shared.externalId = externalId
         let config = shared.config
         let env = shared.environment
+        let src = shared.installSource
         shared.lock.unlock()
-        if let config { shared.persistSharedConfig(config: config, externalId: externalId, environment: env) }
+        if let config { shared.persistSharedConfig(config: config, externalId: externalId, environment: env, installSource: src) }
     }
 
     /// Logout — detach the external id from this device.
@@ -99,13 +103,14 @@ public final class Loop: @unchecked Sendable {
         shared.externalId = nil
         let config = shared.config
         let env = shared.environment
+        let src = shared.installSource
         shared.lock.unlock()
-        if let config { shared.persistSharedConfig(config: config, externalId: nil, environment: env) }
+        if let config { shared.persistSharedConfig(config: config, externalId: nil, environment: env, installSource: src) }
     }
 
     /// Mirror the ingest config into the App Group so the NSE (separate process)
     /// can emit `received`. No-op when no App Group is configured.
-    private func persistSharedConfig(config: LoopConfig, externalId: String?, environment: ApnsEnvironment) {
+    private func persistSharedConfig(config: LoopConfig, externalId: String?, environment: ApnsEnvironment, installSource: InstallSource) {
         guard let group = config.appGroup else { return }
         LoopAppGroupStore.save(
             LoopSharedConfig(
@@ -113,7 +118,8 @@ public final class Loop: @unchecked Sendable {
                 tenantId: config.tenantId,
                 publishableKey: config.publishableKey,
                 externalId: externalId,
-                environment: environment
+                environment: environment,
+                installSource: installSource
             ),
             appGroup: group
         )
@@ -133,6 +139,7 @@ public final class Loop: @unchecked Sendable {
         lock.lock()
         guard let config, let transport, let externalId else { lock.unlock(); return }
         let env = environment
+        let src = installSource
         lock.unlock()
 
         let osv = ProcessInfo.processInfo.operatingSystemVersion
@@ -141,6 +148,7 @@ public final class Loop: @unchecked Sendable {
             osVersion: "\(osv.majorVersion).\(osv.minorVersion).\(osv.patchVersion)",
             appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
             environment: env,
+            installSource: src,
             tzIana: TimeZone.current.identifier,
             locale: Locale.current.identifier
         )
@@ -219,6 +227,7 @@ public extension Loop {
             osVersion: "\(osv.majorVersion).\(osv.minorVersion).\(osv.patchVersion)",
             appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
             environment: config.environment,
+            installSource: config.installSource,
             tzIana: TimeZone.current.identifier,
             locale: Locale.current.identifier
         )
