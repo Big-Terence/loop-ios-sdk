@@ -15,19 +15,24 @@ public struct LoopSharedConfig: Codable, Sendable, Equatable {
     /// The id last passed to `Loop.identify` — required to attribute `received`.
     public var externalId: String?
     public var environment: ApnsEnvironment?
+    /// Install source detected by the app (the NSE can't reliably detect its own) so the
+    /// `received` event carries the same TestFlight/App Store signal as `track` events.
+    public var installSource: InstallSource?
 
     public init(
         apiBase: URL,
         tenantId: String,
         publishableKey: String? = nil,
         externalId: String? = nil,
-        environment: ApnsEnvironment? = nil
+        environment: ApnsEnvironment? = nil,
+        installSource: InstallSource? = nil
     ) {
         self.apiBase = apiBase
         self.tenantId = tenantId
         self.publishableKey = publishableKey
         self.externalId = externalId
         self.environment = environment
+        self.installSource = installSource
     }
 }
 
