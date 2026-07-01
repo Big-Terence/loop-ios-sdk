@@ -47,6 +47,12 @@ public final class Loop: @unchecked Sendable {
     private var environment: ApnsEnvironment = .sandbox
     private var installSource: InstallSource = .development
 
+    // N22 — warn ONCE (never spam) when track() or registerDeviceToken() is
+    // called before identify(). Without an externalId the event is silently
+    // dropped; the warning surfaces the root cause immediately in the Xcode
+    // console so the developer doesn't waste time hunting for missing events.
+    private var didWarnNoIdentity = false
+
     private init() {}
 
     // MARK: configure / identify
@@ -137,6 +143,13 @@ public final class Loop: @unchecked Sendable {
 
     public func track(_ name: String, _ properties: [String: LoopValue] = [:]) {
         lock.lock()
+        // N22 — warn once if track is called before identify; the event is dropped.
+        if externalId == nil && !didWarnNoIdentity {
+            didWarnNoIdentity = true
+            lock.unlock()
+            print("[Loop] ⚠️ track(\"\(name)\") called before Loop.identify() — the event is dropped until an external id is set. Call Loop.identify(yourUserId) in didFinishLaunchingWithOptions before tracking events.")
+            return
+        }
         guard let config, let transport, let externalId else { lock.unlock(); return }
         let env = environment
         let src = installSource
@@ -167,6 +180,14 @@ public final class Loop: @unchecked Sendable {
     public func registerDeviceToken(_ tokenData: Data) {
         let token = tokenData.map { String(format: "%02x", $0) }.joined()
         lock.lock()
+        // N22 — warn once if the device token arrives before identify(); the
+        // registration is dropped and the device will never be reachable for push.
+        if externalId == nil && !didWarnNoIdentity {
+            didWarnNoIdentity = true
+            lock.unlock()
+            print("[Loop] ⚠️ LoopPush.didRegister(deviceToken:) called before Loop.identify() — the token is dropped. Call Loop.identify(yourUserId) before LoopPush.register() so the device token is always attributed to a user.")
+            return
+        }
         guard let transport, let externalId else { lock.unlock(); return }
         let env = environment
         lock.unlock()

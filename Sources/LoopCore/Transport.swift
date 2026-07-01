@@ -53,13 +53,24 @@ public final class Transport: @unchecked Sendable {
     }
 
     /// Registers/updates a device subscription (token + auto-detected environment).
+    /// M9 — appVersion + osVersion are included so the dashboard can show "which
+    /// SDK version / OS version is this token from" without a separate identify call.
+    /// Both are Foundation-only (Bundle + ProcessInfo) — no UIKit dependency.
     public func register(externalId: String, deviceToken: String, environment: ApnsEnvironment) {
-        let payload: [String: String] = [
+        let osv = ProcessInfo.processInfo.operatingSystemVersion
+        let osVersion = "\(osv.majorVersion).\(osv.minorVersion).\(osv.patchVersion)"
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+
+        var payload: [String: String] = [
             "tenantId": config.tenantId,
             "externalId": externalId,
             "deviceToken": deviceToken,
             "pushEnvironment": environment.rawValue,
+            "osVersion": osVersion,
         ]
+        if !appVersion.isEmpty {
+            payload["appVersion"] = appVersion
+        }
         guard let body = try? JSONSerialization.data(withJSONObject: payload) else { return }
         var req = URLRequest(url: config.apiBase.appendingPathComponent("v1/register"))
         req.httpMethod = "POST"

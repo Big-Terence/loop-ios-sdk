@@ -10,7 +10,7 @@ with `#if canImport(UIKit)` / `#if os(iOS)`.
 ## Install (SwiftPM)
 
 ```swift
-.package(url: "https://github.com/<org>/loop-ios", from: "0.1.0")
+.package(url: "https://github.com/Big-Terence/loop-ios-sdk", from: "0.1.0")
 // then add the products you need: LoopCore, LoopPush, LoopInApp
 // + LoopNotificationService in your NotificationServiceExtension target.
 ```
