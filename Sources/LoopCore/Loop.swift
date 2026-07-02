@@ -135,6 +135,51 @@ public final class Loop: @unchecked Sendable {
         lock.lock(); defer { lock.unlock() }; return environment
     }
 
+    // MARK: - internal consent helper (accessed by the public extension below)
+
+    /// Posts the consent record. Must be called on `shared` only.
+    /// This method is **internal**, not `private` — it has to be module-visible so the
+    /// `public extension` above can call it — but it is deliberately kept out of the
+    /// PUBLIC API surface; the extension exposes the two typed entry-points
+    /// (`setConsent` / `setMarketingConsent`).
+    func _setConsent(category: String, optedIn: Bool) {
+        lock.lock()
+        // N22 pattern — warn once if called before identify(); the record is dropped.
+        if externalId == nil && !didWarnNoIdentity {
+            didWarnNoIdentity = true
+            lock.unlock()
+            // L17 — DEBUG-only diagnostic (compiled out of Release; no user data in prod logs).
+            LoopLog.debug("Loop.setConsent(category:\"\(category)\") called before Loop.identify() — the consent record is dropped. Call Loop.identify(yourUserId) before registering consent preferences.")
+            return
+        }
+        guard let transport, let externalId else { lock.unlock(); return }
+        lock.unlock()
+        let action = optedIn ? "opt_in" : "opt_out"
+        // Durably record the explicit choice FIRST, then post. It is cleared only on a
+        // 2xx ack; until then it survives the pre-register window and app restarts and
+        // is replayed after registration, so an explicit opt-out is never lost (the
+        // sacred invariant) even when posted before the backend user exists.
+        PendingConsentStore.record(externalId: externalId, category: category, action: action)
+        transport.sendConsent(externalId: externalId, category: category, optedIn: optedIn) {
+            PendingConsentStore.clear(externalId: externalId, category: category, ifAction: action)
+        }
+    }
+
+    /// Re-send any consent choice that hasn't been acknowledged yet. Called after a
+    /// successful device registration — the point at which the backend user is
+    /// guaranteed to exist — so a choice made before that (and 404'd) finally lands.
+    private func replayPendingConsent(externalId: String) {
+        let pending = PendingConsentStore.pending(externalId: externalId)
+        guard !pending.isEmpty else { return }
+        lock.lock(); let transport = self.transport; lock.unlock()
+        guard let transport else { return }
+        for (category, action) in pending {
+            transport.sendConsent(externalId: externalId, category: category, optedIn: action == "opt_in") {
+                PendingConsentStore.clear(externalId: externalId, category: category, ifAction: action)
+            }
+        }
+    }
+
     // MARK: track
 
     public static func track(_ name: String, _ properties: [String: LoopValue] = [:]) {
@@ -193,7 +238,51 @@ public final class Loop: @unchecked Sendable {
         guard let transport, let externalId else { lock.unlock(); return }
         let env = environment
         lock.unlock()
-        transport.register(externalId: externalId, deviceToken: token, environment: env)
+        transport.register(externalId: externalId, deviceToken: token, environment: env) { [weak self] in
+            self?.replayPendingConsent(externalId: externalId)
+        }
+    }
+}
+
+// MARK: - Consent (opt-out model)
+
+public extension Loop {
+    /// Register an **explicit** user consent choice for the given notification
+    /// category (default: `"marketing"`).
+    ///
+    /// **Loop is opt-out by default.** Granting push-notification permission in the
+    /// iOS system prompt (which produces a registered device token) is all that is
+    /// needed for Loop to deliver notifications. Your app does **not** need to call
+    /// this method to start receiving pushes.
+    ///
+    /// Call this **only** when the user makes an explicit choice in your own
+    /// preference UI (e.g. a "Marketing notifications" toggle in Settings):
+    ///
+    /// ```swift
+    /// // User turned the toggle OFF — record the opt-out:
+    /// Loop.setConsent(category: "marketing", optedIn: false)
+    ///
+    /// // User turned the toggle back ON — record the re-opt-in:
+    /// Loop.setConsent(category: "marketing", optedIn: true)
+    /// ```
+    ///
+    /// An explicit `optedIn: false` (opt-out) is **always honoured** server-side —
+    /// Loop will never deliver a notification to a user who has explicitly opted out,
+    /// regardless of any flow configuration. This invariant is unconditional.
+    ///
+    /// Requires a prior `Loop.identify` call so the consent record can be attributed
+    /// to a user. If called before `identify`, the call is silently dropped and a
+    /// one-time diagnostic is logged to the Xcode console (DEBUG builds only).
+    static func setConsent(category: String = "marketing", optedIn: Bool) {
+        shared._setConsent(category: category, optedIn: optedIn)
+    }
+
+    /// Convenience shorthand for `setConsent(category: "marketing", optedIn:)`.
+    ///
+    /// Equivalent to `Loop.setConsent(category: "marketing", optedIn: optedIn)`.
+    /// See `setConsent(category:optedIn:)` for full semantics.
+    static func setMarketingConsent(_ optedIn: Bool) {
+        shared._setConsent(category: "marketing", optedIn: optedIn)
     }
 }
 

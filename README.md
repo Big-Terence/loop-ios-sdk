@@ -107,6 +107,52 @@ Group at `Loop.configure`/`Loop.identify`, and the NSE reads it back. To wire it
 Without an App Group the NSE still renders rich media — it just won't emit `received`.
 `received` is best-effort and **never blocks** the notification from showing.
 
+## Consent model (opt-out)
+
+Loop uses an **opt-out model**: granting push-notification permission in the iOS
+system dialog (which produces a registered device token) is sufficient for Loop to
+deliver notifications. **Your app does not need to send any consent signal to start
+receiving pushes.**
+
+You only need to call the consent API when the user makes an **explicit choice** in
+your own preferences UI — for example a "Marketing notifications" toggle in Settings.
+An explicit opt-out is always honoured server-side; Loop will never deliver a
+notification to a user who has opted out, regardless of flow configuration.
+
+The SDK guarantees the choice reaches the backend even if it's made *before* the
+backend user exists (e.g. an opt-out toggled during onboarding, before the first
+device registration): the choice is recorded durably on-device and re-sent once
+registration materialises the user, so an explicit opt-out is never lost.
+
+```swift
+// User toggled marketing notifications OFF:
+Loop.setMarketingConsent(false)   // convenience for category "marketing"
+
+// User toggled them back ON:
+Loop.setMarketingConsent(true)
+
+// Or use the generic form for other categories:
+Loop.setConsent(category: "marketing", optedIn: false)
+```
+
+Both methods require a prior `Loop.identify` call (so the record can be attributed to
+a user). If called before `identify`, the call is a no-op and a one-time diagnostic
+appears in the Xcode console (DEBUG builds only, compiled out of Release). After
+`identify`, the choice is durable: it's persisted on-device and only dropped once the
+backend acknowledges it, so calling it before the first `/v1/register` is safe.
+
+| Method | Effect |
+|---|---|
+| `setMarketingConsent(false)` | Records `opt_out` — Loop suppresses all future sends to this user for the `marketing` category |
+| `setMarketingConsent(true)` | Records `opt_in` — lifts a previous opt-out |
+| `setConsent(category:optedIn:)` | Same as above for an arbitrary category string |
+
+The calls POST `{ externalId, category, action }` to `/v1/consent` (same write-key
+auth as events), fire-and-forget with bounded exponential backoff. Unlike events, a
+`404` (subject not yet materialised server-side) is treated as *retryable*, and the
+choice is additionally recorded on-device and replayed after the next successful
+device registration — so a choice made before the backend user exists still lands.
+
 ## RevenueCat: use the same user id
 
 Loop attributes RevenueCat revenue events (`trial_started`, `subscription_started`,

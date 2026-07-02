@@ -109,7 +109,12 @@ public final class Transport: @unchecked Sendable {
     /// M9 — appVersion + osVersion are included so the dashboard can show "which
     /// SDK version / OS version is this token from" without a separate identify call.
     /// Both are Foundation-only (Bundle + ProcessInfo) — no UIKit dependency.
-    public func register(externalId: String, deviceToken: String, environment: ApnsEnvironment) {
+    public func register(
+        externalId: String,
+        deviceToken: String,
+        environment: ApnsEnvironment,
+        onSuccess: (() -> Void)? = nil
+    ) {
         guard transportAllowed else { return } // L16 — never a token over cleartext http
         let osv = ProcessInfo.processInfo.operatingSystemVersion
         let osVersion = "\(osv.majorVersion).\(osv.minorVersion).\(osv.patchVersion)"
@@ -131,7 +136,9 @@ public final class Transport: @unchecked Sendable {
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         authorize(&req)
         req.httpBody = body
-        post(req, attempt: 0)
+        // A successful registration materialises the backend user, so it's the
+        // moment to replay any consent choice that was made before the user existed.
+        post(req, attempt: 0, onSuccess: onSuccess)
     }
 
     /// Attach the publishable write-key as `Authorization: Bearer <key>` (A2). No-op
@@ -141,14 +148,62 @@ public final class Transport: @unchecked Sendable {
         req.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
     }
 
-    private func post(_ req: URLRequest, attempt: Int) {
+    /// Posts a consent record to `/v1/consent`.
+    ///
+    /// Loop operates on an **opt-out model**: device registration alone is sufficient
+    /// for delivery. Call this only to forward an explicit user choice (opt-out or
+    /// re-opt-in) so the backend can honour it. Body shape:
+    /// `{ "externalId": …, "category": …, "action": "opt_in" | "opt_out" }`.
+    ///
+    /// A 404 is treated as **retryable** here (unlike events): the subject may not
+    /// exist server-side yet — e.g. an opt-out toggled during onboarding, before the
+    /// first `/v1/register`. Retrying (bounded) lets the choice land once the user
+    /// materialises. `onSuccess` fires on a 2xx so the caller can clear its durable
+    /// pending-consent record. Combined with replay-after-register, this makes an
+    /// explicit opt-out impossible to lose (the sacred invariant).
+    public func sendConsent(
+        externalId: String,
+        category: String,
+        optedIn: Bool,
+        onSuccess: (() -> Void)? = nil
+    ) {
+        guard transportAllowed else { return }
+        let payload: [String: String] = [
+            "externalId": externalId,
+            "category": category,
+            "action": optedIn ? "opt_in" : "opt_out",
+        ]
+        guard let body = try? JSONSerialization.data(withJSONObject: payload) else { return }
+        var req = URLRequest(url: config.apiBase.appendingPathComponent("v1/consent"))
+        req.httpMethod = "POST"
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        authorize(&req)
+        req.httpBody = body
+        post(req, attempt: 0, retryNotFound: true, maxRetries: 8, onSuccess: onSuccess)
+    }
+
+    private func post(
+        _ req: URLRequest,
+        attempt: Int,
+        retryNotFound: Bool = false,
+        maxRetries: Int = 4,
+        onSuccess: (() -> Void)? = nil
+    ) {
         session.dataTask(with: req) { [weak self] _, response, error in
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            if (200..<300).contains(status) {
+                onSuccess?()
+                return
+            }
+            // A 404 is retried only for subjects that may still be materialising
+            // (consent before register); events/registrations never retry a 404.
             let transient = error != nil || status >= 500 || status == 429
-            if transient && attempt < 4 {
-                let delay = pow(2.0, Double(attempt)) * 0.5
+                || (retryNotFound && status == 404)
+            if transient && attempt < maxRetries {
+                let delay = min(pow(2.0, Double(attempt)) * 0.5, 30)
                 DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
-                    self?.post(req, attempt: attempt + 1)
+                    self?.post(req, attempt: attempt + 1, retryNotFound: retryNotFound,
+                               maxRetries: maxRetries, onSuccess: onSuccess)
                 }
             }
         }.resume()

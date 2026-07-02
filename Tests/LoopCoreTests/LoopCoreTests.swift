@@ -189,6 +189,83 @@ final class LoopCoreTests: XCTestCase {
         XCTAssertEqual(env.context.environment, .production)
     }
 
+    // MARK: Consent — opt-out model (POST /v1/consent with category + action)
+
+    func testConsentOptOutPostsCorrectPayload() throws {
+        let req = try captureRequest { transport in
+            transport.sendConsent(externalId: "user_alice", category: "marketing", optedIn: false)
+        }
+        XCTAssertEqual(req.url?.path, "/v1/consent")
+        XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization"), "Bearer lpk_test123")
+        let body = try XCTUnwrap(requestBody(req))
+        let obj = try XCTUnwrap(JSONSerialization.jsonObject(with: body) as? [String: String])
+        XCTAssertEqual(obj["externalId"], "user_alice")
+        XCTAssertEqual(obj["category"], "marketing")
+        XCTAssertEqual(obj["action"], "opt_out")
+    }
+
+    func testConsentOptInPostsCorrectAction() throws {
+        let req = try captureRequest { transport in
+            transport.sendConsent(externalId: "user_alice", category: "marketing", optedIn: true)
+        }
+        XCTAssertEqual(req.url?.path, "/v1/consent")
+        let body = try XCTUnwrap(requestBody(req))
+        let obj = try XCTUnwrap(JSONSerialization.jsonObject(with: body) as? [String: String])
+        XCTAssertEqual(obj["action"], "opt_in")
+    }
+
+    func testConsentSendsAuthorizationHeader() throws {
+        let req = try captureRequest { transport in
+            transport.sendConsent(externalId: "user_bob", category: "marketing", optedIn: false)
+        }
+        XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization"), "Bearer lpk_test123")
+    }
+
+    func testConsentOmitsAuthHeaderWithoutKey() throws {
+        let req = try captureRequest(publishableKey: nil) { transport in
+            transport.sendConsent(externalId: "user_bob", category: "marketing", optedIn: false)
+        }
+        XCTAssertNil(req.value(forHTTPHeaderField: "Authorization"))
+    }
+
+    // MARK: Pending-consent store — an explicit opt-out survives until acked (invariant)
+
+    func testPendingConsentRecordReplayClear() throws {
+        let uid = "user_\(UUID().uuidString)"
+        defer { PendingConsentStore.clear(externalId: uid, category: "marketing", ifAction: "opt_in")
+                PendingConsentStore.clear(externalId: uid, category: "marketing", ifAction: "opt_out") }
+
+        // Recorded and readable (this is what replay-after-register consumes).
+        PendingConsentStore.record(externalId: uid, category: "marketing", action: "opt_out")
+        XCTAssertEqual(PendingConsentStore.pending(externalId: uid), ["marketing": "opt_out"])
+
+        // A stale ack of a superseded choice must NOT clear the newer pending one.
+        PendingConsentStore.record(externalId: uid, category: "marketing", action: "opt_in")
+        PendingConsentStore.clear(externalId: uid, category: "marketing", ifAction: "opt_out")
+        XCTAssertEqual(PendingConsentStore.pending(externalId: uid), ["marketing": "opt_in"])
+
+        // Acking the current choice clears it.
+        PendingConsentStore.clear(externalId: uid, category: "marketing", ifAction: "opt_in")
+        XCTAssertTrue(PendingConsentStore.pending(externalId: uid).isEmpty)
+    }
+
+    /// URLSession moves `httpBody` to `httpBodyStream` inside URLProtocol handlers.
+    /// This helper reads from either source so body-inspection tests stay readable.
+    private func requestBody(_ req: URLRequest) -> Data? {
+        if let data = req.httpBody { return data }
+        guard let stream = req.httpBodyStream else { return nil }
+        stream.open()
+        defer { stream.close() }
+        var data = Data()
+        let buf = UnsafeMutablePointer<UInt8>.allocate(capacity: 4096)
+        defer { buf.deallocate() }
+        while stream.hasBytesAvailable {
+            let n = stream.read(buf, maxLength: 4096)
+            if n > 0 { data.append(buf, count: n) } else { break }
+        }
+        return data.isEmpty ? nil : data
+    }
+
     func testReceivedEnvelopeNilWithoutIdentity() {
         let cfg = LoopSharedConfig(
             apiBase: URL(string: "https://ingest.example.com")!,
