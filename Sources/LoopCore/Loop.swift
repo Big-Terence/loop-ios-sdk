@@ -147,7 +147,8 @@ public final class Loop: @unchecked Sendable {
         if externalId == nil && !didWarnNoIdentity {
             didWarnNoIdentity = true
             lock.unlock()
-            print("[Loop] ⚠️ track(\"\(name)\") called before Loop.identify() — the event is dropped until an external id is set. Call Loop.identify(yourUserId) in didFinishLaunchingWithOptions before tracking events.")
+            // L17 — DEBUG-only diagnostic (compiled out of Release; no app data in prod logs).
+            LoopLog.debug("track(\"\(name)\") called before Loop.identify() — the event is dropped until an external id is set. Call Loop.identify(yourUserId) in didFinishLaunchingWithOptions before tracking events.")
             return
         }
         guard let config, let transport, let externalId else { lock.unlock(); return }
@@ -185,7 +186,8 @@ public final class Loop: @unchecked Sendable {
         if externalId == nil && !didWarnNoIdentity {
             didWarnNoIdentity = true
             lock.unlock()
-            print("[Loop] ⚠️ LoopPush.didRegister(deviceToken:) called before Loop.identify() — the token is dropped. Call Loop.identify(yourUserId) before LoopPush.register() so the device token is always attributed to a user.")
+            // L17 — DEBUG-only diagnostic (compiled out of Release; no token/app data in prod logs).
+            LoopLog.debug("LoopPush.didRegister(deviceToken:) called before Loop.identify() — the token is dropped. Call Loop.identify(yourUserId) before LoopPush.register() so the device token is always attributed to a user.")
             return
         }
         guard let transport, let externalId else { lock.unlock(); return }

@@ -1,7 +1,10 @@
 import Foundation
+#if canImport(Security)
+import Security
+#endif
 
 /// Cross-process configuration shared between the app and its
-/// NotificationServiceExtension via an **App Group** `UserDefaults`.
+/// NotificationServiceExtension via the shared **App Group** Keychain.
 ///
 /// The NSE runs in a SEPARATE process and never sees the app's runtime
 /// `Loop.shared` state. To emit the `received` deliverability event from the NSE
@@ -36,25 +39,108 @@ public struct LoopSharedConfig: Codable, Sendable, Equatable {
     }
 }
 
-/// Reads/writes `LoopSharedConfig` to an App Group `UserDefaults` suite. The app
-/// and the NSE must use the SAME App Group id (`Loop.configure(appGroup:)` ==
-/// the NSE's `loopAppGroup`). No-ops cleanly when the suite can't be opened.
+/// Reads/writes `LoopSharedConfig` for the app ⇄ NSE handoff. The app and the
+/// NSE must use the SAME App Group id (`Loop.configure(appGroup:)` == the NSE's
+/// `loopAppGroup`). No-ops cleanly when the store can't be opened.
+///
+/// L15 — the config carries the publishable key and the external id, so it now
+/// lives in the **Keychain** (generic password, `kSecAttrAccessGroup` = the App
+/// Group id, `AfterFirstUnlock` so the NSE can read it for pushes that arrive
+/// while the device is locked) instead of a cleartext plist. iOS lets App Group
+/// ids double as Keychain access groups, so the existing App Group entitlement
+/// on both targets is enough — no integrator change required.
+///
+/// Migration is transparent and one-way: a value still sitting in the legacy
+/// App Group `UserDefaults` is read once, promoted to the Keychain, and the
+/// plist copy is deleted. Writes are **fail-closed**: when the Keychain is
+/// unavailable (missing entitlement, transient error) the config is simply NOT
+/// persisted — never written back to the cleartext plist. Losing the NSE
+/// `received` event until a Keychain write succeeds beats leaving the
+/// publishable key readable on disk.
 public enum LoopAppGroupStore {
     static let key = "com.loop.sdk.sharedConfig.v1"
+    static let keychainService = "com.loop.sdk.sharedConfig"
 
     public static func save(_ config: LoopSharedConfig, appGroup: String) {
-        guard let defaults = UserDefaults(suiteName: appGroup),
-              let data = try? JSONEncoder().encode(config) else { return }
-        defaults.set(data, forKey: key)
+        guard let data = try? JSONEncoder().encode(config) else { return }
+        // L15 — the legacy cleartext copy is retired unconditionally: after a
+        // save, the only acceptable resting place for the key is the Keychain.
+        UserDefaults(suiteName: appGroup)?.removeObject(forKey: key)
+        // Fail closed: on Keychain failure the config is not persisted at all
+        // (`keychainWrite` logs the OSStatus). `load` then comes up empty and
+        // the next `Loop.configure`/`identify` retries the write.
+        _ = keychainWrite(data, appGroup: appGroup)
     }
 
     public static func load(appGroup: String) -> LoopSharedConfig? {
+        if let data = keychainRead(appGroup: appGroup) {
+            return try? JSONDecoder().decode(LoopSharedConfig.self, from: data)
+        }
+        // One-time transparent migration from the legacy UserDefaults plist.
         guard let defaults = UserDefaults(suiteName: appGroup),
               let data = defaults.data(forKey: key) else { return nil }
+        if keychainWrite(data, appGroup: appGroup) {
+            defaults.removeObject(forKey: key) // only once safely in the Keychain
+        }
         return try? JSONDecoder().decode(LoopSharedConfig.self, from: data)
     }
 
     public static func clear(appGroup: String) {
+        keychainDelete(appGroup: appGroup)
         UserDefaults(suiteName: appGroup)?.removeObject(forKey: key)
     }
+
+    // MARK: Keychain plumbing (generic password shared via the App Group)
+
+    #if canImport(Security)
+    private static func baseQuery(appGroup: String) -> [String: Any] {
+        [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: key,
+            kSecAttrAccessGroup as String: appGroup,
+            // Force the iOS-style data-protection keychain on macOS too, so
+            // access-group semantics are identical across both platforms.
+            kSecUseDataProtectionKeychain as String: true,
+        ]
+    }
+
+    private static func keychainWrite(_ data: Data, appGroup: String) -> Bool {
+        let update: [String: Any] = [kSecValueData as String: data]
+        var status = SecItemUpdate(baseQuery(appGroup: appGroup) as CFDictionary, update as CFDictionary)
+        if status == errSecItemNotFound {
+            var add = baseQuery(appGroup: appGroup)
+            add[kSecValueData as String] = data
+            // AfterFirstUnlock: the NSE must read this while the device is locked
+            // (pushes arrive any time after first unlock). Never synchronized to
+            // iCloud (default), so the key stays on-device.
+            add[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlock
+            status = SecItemAdd(add as CFDictionary, nil)
+        }
+        if status != errSecSuccess {
+            // L15 — never fall back to cleartext. Status code only, no values;
+            // -34018 (errSecMissingEntitlement) means the App Group is missing
+            // from the target's Keychain/App Groups entitlements.
+            LoopLog.error("Shared-config Keychain write failed (OSStatus \(status)) — config not persisted, cleartext fallback refused.")
+        }
+        return status == errSecSuccess
+    }
+
+    private static func keychainRead(appGroup: String) -> Data? {
+        var query = baseQuery(appGroup: appGroup)
+        query[kSecReturnData as String] = true
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        var out: CFTypeRef?
+        guard SecItemCopyMatching(query as CFDictionary, &out) == errSecSuccess else { return nil }
+        return out as? Data
+    }
+
+    private static func keychainDelete(appGroup: String) {
+        SecItemDelete(baseQuery(appGroup: appGroup) as CFDictionary)
+    }
+    #else
+    private static func keychainWrite(_ data: Data, appGroup: String) -> Bool { false }
+    private static func keychainRead(appGroup: String) -> Data? { nil }
+    private static func keychainDelete(appGroup: String) {}
+    #endif
 }

@@ -129,8 +129,10 @@ final class LoopCoreTests: XCTestCase {
         return try XCTUnwrap(CapturingProtocol.captured)
     }
 
-    // MARK: App Group shared config round-trip (app ⇄ NSE)
-    func testSharedConfigStoreRoundTrip() throws {
+    // MARK: App Group shared config (app ⇄ NSE) — Keychain-only, fail-closed (L15)
+    // `swift test` runs without a Keychain access-group entitlement — exactly the
+    // failure mode L15 guards against: save must persist NOTHING in cleartext.
+    func testSharedConfigSaveNeverWritesCleartext() throws {
         let suite = "test.loop.sdk.\(UUID().uuidString)"
         defer { UserDefaults().removePersistentDomain(forName: suite) }
         let cfg = LoopSharedConfig(
@@ -139,6 +141,27 @@ final class LoopCoreTests: XCTestCase {
             externalId: "user_alice", environment: .production
         )
         LoopAppGroupStore.save(cfg, appGroup: suite)
+        // Whatever the Keychain verdict, the key must never rest in the plist.
+        XCTAssertNil(UserDefaults(suiteName: suite)?.data(forKey: LoopAppGroupStore.key))
+        // Unentitled process ⇒ fail closed; an entitled one must round-trip faithfully.
+        if let loaded = LoopAppGroupStore.load(appGroup: suite) {
+            XCTAssertEqual(loaded, cfg)
+        }
+        LoopAppGroupStore.clear(appGroup: suite)
+        XCTAssertNil(LoopAppGroupStore.load(appGroup: suite))
+    }
+
+    // A value written by a pre-Keychain SDK must still be readable (transparent
+    // migration) and removable via `clear`.
+    func testSharedConfigLegacyPlistStillLoads() throws {
+        let suite = "test.loop.sdk.\(UUID().uuidString)"
+        defer { UserDefaults().removePersistentDomain(forName: suite) }
+        let cfg = LoopSharedConfig(
+            apiBase: URL(string: "https://ingest.example.com")!,
+            tenantId: "tenant-1", publishableKey: "lpk_abc",
+            externalId: "user_alice", environment: .production
+        )
+        UserDefaults(suiteName: suite)?.set(try JSONEncoder().encode(cfg), forKey: LoopAppGroupStore.key)
         let loaded = try XCTUnwrap(LoopAppGroupStore.load(appGroup: suite))
         XCTAssertEqual(loaded, cfg)
         LoopAppGroupStore.clear(appGroup: suite)
