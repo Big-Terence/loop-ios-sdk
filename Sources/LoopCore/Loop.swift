@@ -223,7 +223,13 @@ public final class Loop: @unchecked Sendable {
 
     // MARK: push registration (called by LoopPush)
 
-    public func registerDeviceToken(_ tokenData: Data) {
+    /// Register the APNs device token with Loop.
+    ///
+    /// Called by `LoopPush.didRegister(deviceToken:)` which reads the authorization
+    /// level from `UNUserNotificationCenter` before forwarding here. The older
+    /// `registerDeviceToken(_:)` overload (no level) is kept for source compatibility
+    /// with any callers that bypass `LoopPush`.
+    public func registerDeviceToken(_ tokenData: Data, authorizationLevel: String? = nil) {
         let token = tokenData.map { String(format: "%02x", $0) }.joined()
         lock.lock()
         // N22 — warn once if the device token arrives before identify(); the
@@ -238,9 +244,20 @@ public final class Loop: @unchecked Sendable {
         guard let transport, let externalId else { lock.unlock(); return }
         let env = environment
         lock.unlock()
-        transport.register(externalId: externalId, deviceToken: token, environment: env) { [weak self] in
+        transport.register(externalId: externalId, deviceToken: token, environment: env, authorizationLevel: authorizationLevel) { [weak self] in
             self?.replayPendingConsent(externalId: externalId)
         }
+    }
+
+    /// Re-read the current authorization level from UNUserNotificationCenter.
+    ///
+    /// MVP: the level is captured at the next full `register` call. A dedicated
+    /// token-less level-only POST is deferred to phase-2. This method is a hook
+    /// for future wiring (e.g. foreground return from Settings).
+    public func reportAuthorizationLevel() {
+        // Phase-2 placeholder: phase-2 will POST a level-only update to /v1/register
+        // without re-supplying the token. For now, a no-op — the level is refreshed
+        // whenever the next full didRegister cycle runs (e.g. after an app update).
     }
 }
 

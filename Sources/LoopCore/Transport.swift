@@ -109,10 +109,15 @@ public final class Transport: @unchecked Sendable {
     /// M9 — appVersion + osVersion are included so the dashboard can show "which
     /// SDK version / OS version is this token from" without a separate identify call.
     /// Both are Foundation-only (Bundle + ProcessInfo) — no UIKit dependency.
+    ///
+    /// - Parameter authorizationLevel: The push authorization state read from
+    ///   `UNUserNotificationCenter.getNotificationSettings()` immediately after the
+    ///   APNs token is delivered. Optional — absent for SDK < 0.4 builds.
     public func register(
         externalId: String,
         deviceToken: String,
         environment: ApnsEnvironment,
+        authorizationLevel: String? = nil,
         onSuccess: (() -> Void)? = nil
     ) {
         guard transportAllowed else { return } // L16 — never a token over cleartext http
@@ -129,6 +134,9 @@ public final class Transport: @unchecked Sendable {
         ]
         if !appVersion.isEmpty {
             payload["appVersion"] = appVersion
+        }
+        if let level = authorizationLevel, !level.isEmpty {
+            payload["authorizationLevel"] = level
         }
         guard let body = try? JSONSerialization.data(withJSONObject: payload) else { return }
         var req = URLRequest(url: config.apiBase.appendingPathComponent("v1/register"))
