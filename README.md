@@ -227,3 +227,9 @@ and verifies the integration live. This package is what that flow installs.
 swift test            # LoopCore unit tests: parity vectors, env detection, session,
                       # envelope, write-key auth header, App Group config, `received`
 ```
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
