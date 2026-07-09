@@ -1,3 +1,0 @@
-module LoopInApp {
-    header "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopInApp.build/include/LoopInApp-Swift.h"
-}
