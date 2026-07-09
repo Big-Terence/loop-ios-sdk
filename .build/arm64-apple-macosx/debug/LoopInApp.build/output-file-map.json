@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/master.swiftdeps"
+  },
+  "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopInApp/LoopInApp.swift": {
+    "dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/LoopInApp.d",
+    "object": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/LoopInApp.swift.o",
+    "swiftmodule": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/LoopInApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/LoopInApp.swiftdeps",
+    "diagnostics": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/LoopInApp.dia"
+  }
+}

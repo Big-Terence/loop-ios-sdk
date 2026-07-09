@@ -1,0 +1,13 @@
+{
+  "": {
+    "dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopPush.build/LoopPush.d",
+    "object": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopPush.build/LoopPush.o",
+    "swift-dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopPush.build/master.swiftdeps"
+  },
+  "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPush.swift": {
+    "object": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopPush.build/LoopPush.swift.o",
+    "swiftmodule": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopPush.build/LoopPush~partial.swiftmodule",
+    "swift-dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopPush.build/LoopPush.swiftdeps",
+    "diagnostics": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopPush.build/LoopPush.dia"
+  }
+}

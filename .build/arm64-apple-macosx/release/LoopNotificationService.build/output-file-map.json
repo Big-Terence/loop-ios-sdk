@@ -1,0 +1,13 @@
+{
+  "": {
+    "dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopNotificationService.build/LoopNotificationService.d",
+    "object": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopNotificationService.build/LoopNotificationService.o",
+    "swift-dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopNotificationService.build/master.swiftdeps"
+  },
+  "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopNotificationService/LoopNotificationService.swift": {
+    "object": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopNotificationService.build/LoopNotificationService.swift.o",
+    "swiftmodule": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopNotificationService.build/LoopNotificationService~partial.swiftmodule",
+    "swift-dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopNotificationService.build/LoopNotificationService.swiftdeps",
+    "diagnostics": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopNotificationService.build/LoopNotificationService.dia"
+  }
+}

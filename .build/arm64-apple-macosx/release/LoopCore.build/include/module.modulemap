@@ -1,0 +1,3 @@
+module LoopCore {
+    header "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/release/LoopCore.build/include/LoopCore-Swift.h"
+}

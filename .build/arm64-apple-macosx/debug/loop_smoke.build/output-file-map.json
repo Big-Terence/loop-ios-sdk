@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/master.swiftdeps"
+  },
+  "/Users/terenceplissonneau/loop/sdk/ios/Sources/loop-smoke/main.swift": {
+    "dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/main.d",
+    "object": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/main.swift.o",
+    "swiftmodule": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/main.swiftdeps",
+    "diagnostics": "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/main.dia"
+  }
+}

@@ -1,0 +1,1605 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.xctest/Contents/MacOS/LoopSDKPackageTests",
+      "packagePath" : "/Users/terenceplissonneau/loop/sdk/ios",
+      "productName" : "LoopSDKPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.LoopCore-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/sources",
+      "importPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/ApnsEnvironment.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/InstallSource.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Loop.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/LoopLog.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Models.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Murmur3.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/PendingConsent.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/SharedConfig.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Transport.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "LoopCore",
+      "moduleOutputPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCore.swiftmodule",
+      "objects" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/ApnsEnvironment.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/InstallSource.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Loop.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/LoopLog.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Models.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Murmur3.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/PendingConsent.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/SharedConfig.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Transport.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/include/LoopCore-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/ApnsEnvironment.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/InstallSource.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Loop.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/LoopLog.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Models.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Murmur3.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/PendingConsent.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/SharedConfig.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Transport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCore.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/ApnsEnvironment.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/InstallSource.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Loop.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/LoopLog.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Models.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Murmur3.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/PendingConsent.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/SharedConfig.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Transport.swift"
+      ],
+      "tempsPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.LoopCoreTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build/sources",
+      "importPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Tests/LoopCoreTests/LoopCoreTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "LoopCoreTests",
+      "moduleOutputPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCoreTests.swiftmodule",
+      "objects" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build/LoopCoreTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build/LoopCoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCoreTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/Tests/LoopCoreTests/LoopCoreTests.swift"
+      ],
+      "tempsPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.LoopInApp-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/sources",
+      "importPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopInApp/LoopInApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "LoopInApp",
+      "moduleOutputPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopInApp.swiftmodule",
+      "objects" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/LoopInApp.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/include/LoopInApp-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/LoopInApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopInApp.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopInApp/LoopInApp.swift"
+      ],
+      "tempsPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.LoopNotificationService-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/sources",
+      "importPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopNotificationService/LoopNotificationService.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "LoopNotificationService",
+      "moduleOutputPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopNotificationService.swiftmodule",
+      "objects" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/LoopNotificationService.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/include/LoopNotificationService-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/LoopNotificationService.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopNotificationService.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopNotificationService/LoopNotificationService.swift"
+      ],
+      "tempsPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.LoopPush-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/sources",
+      "importPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPrimer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPush.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "LoopPush",
+      "moduleOutputPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopPush.swiftmodule",
+      "objects" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/LoopPrimer.swift.o",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/LoopPush.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/include/LoopPush-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/LoopPrimer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/LoopPush.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopPush.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPrimer.swift",
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPush.swift"
+      ],
+      "tempsPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.LoopSDKPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/sources",
+      "importPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCoreTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "LoopSDKPackageTests",
+      "moduleOutputPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopSDKPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/include/LoopSDKPackageTests-Swift.h",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopSDKPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.loop-smoke-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/sources",
+      "importPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/loop-smoke/main.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/LoopCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "loop_smoke",
+      "moduleOutputPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/loop_smoke.swiftmodule",
+      "objects" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/main.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "loop_smoke_main",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules/loop_smoke.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/terenceplissonneau/loop/sdk/ios/Sources/loop-smoke/main.swift"
+      ],
+      "tempsPath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "LoopCore" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "LoopCore",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/ApnsEnvironment.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/InstallSource.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Loop.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/LoopLog.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Models.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Murmur3.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/PendingConsent.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/SharedConfig.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Transport.swift",
+      "-I",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/include/LoopCore-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "LoopCoreTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "LoopCoreTests",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/terenceplissonneau/loop/sdk/ios/Tests/LoopCoreTests/LoopCoreTests.swift",
+      "-I",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "LoopInApp" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "LoopInApp",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopInApp/LoopInApp.swift",
+      "-I",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/include/LoopInApp-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "LoopNotificationService" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "LoopNotificationService",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopNotificationService/LoopNotificationService.swift",
+      "-I",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/include/LoopNotificationService-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "LoopPush" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "LoopPush",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPrimer.swift",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPush.swift",
+      "-I",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/include/LoopPush-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "LoopSDKPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "LoopSDKPackageTests",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/include/LoopSDKPackageTests-Swift.h",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "loop_smoke" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "loop_smoke",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/terenceplissonneau/loop/sdk/ios/Sources/loop-smoke/main.swift",
+      "-I",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "loop_smoke_main",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "LoopCore" : [
+
+    ],
+    "LoopCoreTests" : [
+      "LoopCore"
+    ],
+    "LoopInApp" : [
+      "LoopCore"
+    ],
+    "LoopNotificationService" : [
+      "LoopCore"
+    ],
+    "LoopPush" : [
+      "LoopCore"
+    ],
+    "LoopSDKPackageTests" : [
+      "LoopCoreTests",
+      "LoopCore"
+    ],
+    "loop_smoke" : [
+      "LoopCore"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/ApnsEnvironment.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/InstallSource.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Loop.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/LoopLog.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Models.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Murmur3.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/PendingConsent.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/SharedConfig.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopCore/Transport.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/sources"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Tests/LoopCoreTests/LoopCoreTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build/sources"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopInApp/LoopInApp.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopInApp.build/sources"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopNotificationService/LoopNotificationService.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopNotificationService.build/sources"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPrimer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/LoopPush/LoopPush.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopPush.build/sources"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/sources"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/ApnsEnvironment.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/InstallSource.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Loop.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/LoopLog.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Models.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Murmur3.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/PendingConsent.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/SharedConfig.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Transport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCoreTests.build/LoopCoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.build/runner.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopSDKPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop-smoke-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop-smoke-entitlement.plist"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop-smoke.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/ApnsEnvironment.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/InstallSource.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Loop.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/LoopLog.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Models.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Murmur3.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/PendingConsent.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/SharedConfig.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/LoopCore.build/Transport.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/main.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop-smoke.product/Objects.LinkFileList"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/terenceplissonneau/loop/sdk/ios/Sources/loop-smoke/main.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/loop_smoke.build/sources"
+    },
+    "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/terenceplissonneau/loop/sdk/ios/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}
