@@ -228,6 +228,36 @@ final class PushlaneCoreTests: XCTestCase {
         XCTAssertNil(req.value(forHTTPHeaderField: "Authorization"))
     }
 
+    // MARK: setAttributes — POST /v1/attributes (user personalisation)
+
+    func testSetAttributesPostsToCorrectEndpointWithAuthHeader() throws {
+        let req = try captureRequest { transport in
+            transport.sendAttributes(externalId: "user_alice", attributes: [
+                "first_name": "Alice",
+                "plan": "scale",
+                "trial": true,
+            ])
+        }
+        XCTAssertEqual(req.url?.path, "/v1/attributes")
+        XCTAssertEqual(req.value(forHTTPHeaderField: "Authorization"), "Bearer lpk_test123")
+        let body = try XCTUnwrap(requestBody(req))
+        let obj = try XCTUnwrap(JSONSerialization.jsonObject(with: body) as? [String: Any])
+        XCTAssertEqual(obj["externalId"] as? String, "user_alice")
+        XCTAssertEqual(obj["tenantId"] as? String, "t")
+        let attrs = try XCTUnwrap(obj["attributes"] as? [String: Any])
+        XCTAssertEqual(attrs["first_name"] as? String, "Alice")
+        XCTAssertEqual(attrs["plan"] as? String, "scale")
+        XCTAssertEqual(attrs["trial"] as? Bool, true)
+    }
+
+    func testSetAttributesOmitsAuthHeaderWithoutKey() throws {
+        let req = try captureRequest(publishableKey: nil) { transport in
+            transport.sendAttributes(externalId: "user_alice", attributes: ["x": 1])
+        }
+        XCTAssertEqual(req.url?.path, "/v1/attributes")
+        XCTAssertNil(req.value(forHTTPHeaderField: "Authorization"))
+    }
+
     // MARK: Pending-consent store — an explicit opt-out survives until acked (invariant)
 
     func testPendingConsentRecordReplayClear() throws {

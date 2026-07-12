@@ -190,6 +190,29 @@ public final class Transport: @unchecked Sendable {
         post(req, attempt: 0, retryNotFound: true, maxRetries: 8, onSuccess: onSuccess)
     }
 
+    /// Posts user attributes to `/v1/attributes`.
+    ///
+    /// Persistent key-value attributes bound to a user — the values resolve
+    /// `{{ name | fallback }}` personalisation tokens at send time.
+    /// Body shape: `{ tenantId, externalId, attributes: [String: PushlaneValue] }`.
+    public func sendAttributes(externalId: String, attributes: [String: PushlaneValue]) {
+        guard transportAllowed else { return }
+        struct Payload: Encodable {
+            let tenantId: String
+            let externalId: String
+            let attributes: [String: PushlaneValue]
+        }
+        guard let body = try? encoder.encode(
+            Payload(tenantId: config.tenantId, externalId: externalId, attributes: attributes)
+        ) else { return }
+        var req = URLRequest(url: config.apiBase.appendingPathComponent("v1/attributes"))
+        req.httpMethod = "POST"
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        authorize(&req)
+        req.httpBody = body
+        post(req, attempt: 0)
+    }
+
     private func post(
         _ req: URLRequest,
         attempt: Int,

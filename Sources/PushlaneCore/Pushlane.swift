@@ -221,6 +221,24 @@ public final class Pushlane: @unchecked Sendable {
         transport.send(envelope)
     }
 
+    // MARK: setAttributes
+
+    /// Persistent user attributes — feeds `{{ name | fallback }}` personalisation at send time.
+    ///
+    /// POST /v1/attributes with the current externalId. No-op if called before `identify()`
+    /// (same silent-drop behaviour as `track()`).
+    public static func setAttributes(_ attributes: [String: PushlaneValue]) {
+        shared.setAttributes(attributes)
+    }
+
+    /// Persistent user attributes — feeds `{{ name | fallback }}` personalisation at send time.
+    public func setAttributes(_ attributes: [String: PushlaneValue]) {
+        lock.lock()
+        guard let transport, let externalId else { lock.unlock(); return }
+        lock.unlock()
+        transport.sendAttributes(externalId: externalId, attributes: attributes)
+    }
+
     // MARK: push registration (called by PushlanePush)
 
     /// Register the APNs device token with Pushlane.
